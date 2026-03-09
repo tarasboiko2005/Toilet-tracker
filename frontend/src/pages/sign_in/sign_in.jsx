@@ -27,17 +27,19 @@ class Sign_in extends Component {
   }
   submitHandler = e => {
     e.preventDefault()
-    console.log(this.state)
-    axios.post('/api/v1/authentication/login', this.state)
+    const payload = {
+      email: this.state.username,
+      password: this.state.password
+    }
+    axios.post('/api/v1/users/auth', payload)
       .then(response => {
-        const token = response.data.token
+        const token = response.data.jwt
         console.log(token)
         localStorage.setItem('jsonwebtoken', token)
         window.location.href = "/";
-        {/* {<p>{window.localStorage.getItem('jsonwebtoken')}</p>} */ }
       })
       .catch(error => {
-        this.setState({ response_error: error.response.data.detail });
+        this.setState({ response_error: error.response?.data?.detail || "Sign in failed" });
         console.log(error);
       })
   }

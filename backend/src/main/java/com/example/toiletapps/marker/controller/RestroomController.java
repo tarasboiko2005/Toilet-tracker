@@ -29,4 +29,22 @@ public class RestroomController {
     public List<RestroomResponse> getRestrooms() {
         return restroomGetUseCase.getRestrooms();
     }
+
+    @GetMapping("/unverified")
+    public List<RestroomResponse> getUnverifiedRestrooms() {
+        return restroomGetUseCase.getUnverifiedRestrooms();
+    }
+
+    @GetMapping("/tags")
+    public List<com.example.toiletapps.marker.model.dto.TagResponse> getTags() {
+        return List.of(
+                new com.example.toiletapps.marker.model.dto.TagResponse("CAFFE"),
+                new com.example.toiletapps.marker.model.dto.TagResponse("SUPERMARKET"),
+                new com.example.toiletapps.marker.model.dto.TagResponse("RESTAURANT"),
+                new com.example.toiletapps.marker.model.dto.TagResponse("PUBLIC"),
+                new com.example.toiletapps.marker.model.dto.TagResponse("FREE"),
+                new com.example.toiletapps.marker.model.dto.TagResponse("PAID"),
+                new com.example.toiletapps.marker.model.dto.TagResponse("STORE")
+        );
+    }
 }

@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -17,8 +19,20 @@ public abstract class RestroomMapper {
     @Mapping(target = "createdAt", ignore = true)
     public abstract Restroom toEntity(RestroomCreateRequest request);
 
-    @Mapping(target = "rating", source = "ratings", qualifiedByName = "toRating")
+    @Mapping(target = "averageRating", source = "ratings", qualifiedByName = "toRating")
+    @Mapping(target = "coordinates", source = "restroom", qualifiedByName = "toCoordinates")
+    @Mapping(target = "tags", source = "restroom", qualifiedByName = "toDefaultTags")
     public abstract RestroomResponse toResponse(Restroom restroom);
+
+    @Named("toCoordinates")
+    public com.example.toiletapps.marker.model.dto.Coordinates toCoordinates(Restroom restroom) {
+        return new com.example.toiletapps.marker.model.dto.Coordinates(restroom.getLatitude(), restroom.getLongitude());
+    }
+
+    @Named("toDefaultTags")
+    public List<com.example.toiletapps.marker.model.dto.TagResponse> toDefaultTags(Restroom restroom) {
+        return Collections.singletonList(new com.example.toiletapps.marker.model.dto.TagResponse("Toilet"));
+    }
 
     @Named("toRating")
     public Double toRating(List<Rating> ratings) {

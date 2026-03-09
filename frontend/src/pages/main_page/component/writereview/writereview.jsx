@@ -40,15 +40,14 @@ function choosereview(props) {
         const authorization = 'Bearer ' + window.localStorage.getItem('jsonwebtoken')
 
         let data = JSON.stringify({
-            "review": textReview,
-            "rating": selectedObject,
-            "markerId": props.children,
+            "value": selectedObject,
+            "restroomId": props.children
         });
 
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: '/api/v1/review/addReview',
+            url: '/api/v1/ratings/rating',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': authorization

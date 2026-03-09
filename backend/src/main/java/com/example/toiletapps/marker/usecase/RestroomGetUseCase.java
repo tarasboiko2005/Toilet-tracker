@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RestroomGetUseCase {
     List<RestroomResponse> getRestrooms();
+    List<RestroomResponse> getUnverifiedRestrooms();
 }

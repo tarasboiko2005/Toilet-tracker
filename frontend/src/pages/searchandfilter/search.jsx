@@ -72,7 +72,7 @@ const Search = () => {
 
     useEffect(() => {
         axios
-            .get("/api/v1/markers/findAll")
+            .get("/api/v1/restrooms/")
             .then((res) => {
                 setMarkers(res.data);
                 console.log(res.data);
@@ -83,15 +83,9 @@ const Search = () => {
     }, []);
 
     markers.forEach((obj) => {
-        if (
-            typeof obj.coordinates === "object" &&
-            "lat" in obj.coordinates &&
-            "lng" in obj.coordinates
-        ) {
-            return;
+        if (!obj.coordinates || typeof obj.coordinates !== "object") {
+            obj.coordinates = { lat: 0, lng: 0 };
         }
-        let [lat, lng] = obj.coordinates.split(", ");
-        obj.coordinates = { lat: parseFloat(lat), lng: parseFloat(lng) };
     });
 
     const onLoad = React.useCallback(
@@ -118,7 +112,7 @@ const Search = () => {
     const [checkboxValues, setCheckboxValues] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/v1/markers/tags')
+        axios.get('/api/v1/restrooms/tags')
             .then(res => {
                 setTags(res.data);
             })

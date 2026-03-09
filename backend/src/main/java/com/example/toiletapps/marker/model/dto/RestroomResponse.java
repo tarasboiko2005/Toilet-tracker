@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class RestroomResponse {
     private Long id;
     private String name;
-    private Double rating;
+    private Double averageRating;
     private RestroomStatus status;
-    private Double latitude;
-    private Double longitude;
+    private Coordinates coordinates;
+    private java.util.List<TagResponse> tags;
 }

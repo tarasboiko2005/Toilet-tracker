@@ -29,14 +29,17 @@ class Sign_up extends Component {
 
   submitHandler = e => {
     e.preventDefault()
-    console.log(this.state)
-    axios.post('/api/v1/accounts/register', this.state)
+    const payload = {
+      name: this.state.username,
+      email: this.state.username,
+      password: this.state.password
+    }
+    axios.post('/api/v1/users/signup', payload)
       .then(response => {
         window.location.href = "/success/sign_up";
       })
       .catch(error => {
-        this.setState({ response_error: error.response.data.detail });
-        console.log(this.state.response_error);
+        this.setState({ response_error: error.response?.data?.detail || "Registration failed" });
         console.log(error);
       })
   }

@@ -17,7 +17,7 @@ export default class AdminMenu extends Component {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: '/api/v1/markers/findAllEqualsFalse',
+            url: '/api/v1/restrooms/unverified',
             headers: {
                 'Authorization': authorization
             }
@@ -53,8 +53,8 @@ export default class AdminMenu extends Component {
                                         buttonPopup: true,
                                         buttonPopup_id: id,
                                         buttonPopup_name: name,
-                                        buttonPopup_coordinates_lat: coordinates.split(',')[0].trim(),
-                                        buttonPopup_coordinates_lng: coordinates.split(',')[1].trim(),
+                                        buttonPopup_coordinates_lat: coordinates.lat,
+                                        buttonPopup_coordinates_lng: coordinates.lng,
                                         buttonPopup_tags: tags
                                     })}>{id} {name}</h1>
                                 <br />

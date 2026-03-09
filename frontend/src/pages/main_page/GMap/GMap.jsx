@@ -131,7 +131,7 @@ function MapToilet({ center }) {
 
     useEffect(() => {
         axios
-            .get("/api/v1/markers/findAll")
+            .get("/api/v1/restrooms/")
             .then((res) => {
                 setMarkers(res.data);
                 console.log(res.data);
@@ -142,17 +142,13 @@ function MapToilet({ center }) {
     }, []);
 
     markers.forEach((obj) => {
-        if (
-            typeof obj.coordinates === "object" &&
-            "lat" in obj.coordinates &&
-            "lng" in obj.coordinates
-        ) {
+        if (obj.coordinates && typeof obj.coordinates === "object") {
             // Розрахунок відстані між центром і об'єктом
             const R = 6371e3; // Радіус Землі в метрах
-            const φ1 = latitude * Math.PI / 180; // Широта центру в радіанах
+            const φ1 = (latitude || 0) * Math.PI / 180; // Широта центру в радіанах
             const φ2 = obj.coordinates.lat * Math.PI / 180; // Широта об'єкта в радіанах
-            const Δφ = (obj.coordinates.lat - latitude) * Math.PI / 180; // Різниця широт
-            const Δλ = (obj.coordinates.lng - longitude) * Math.PI / 180; // Різниця довгот
+            const Δφ = (obj.coordinates.lat - (latitude || 0)) * Math.PI / 180; // Різниця широт
+            const Δλ = (obj.coordinates.lng - (longitude || 0)) * Math.PI / 180; // Різниця довгот
             const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
                 Math.cos(φ1) * Math.cos(φ2) *
                 Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
@@ -165,12 +161,10 @@ function MapToilet({ center }) {
 
             // Запис відстані та часу до об'єкта
             obj.destination = {
-                distance: distance.toFixed(0), // Округлення до двох знаків після коми
-                time: time.toFixed(0) // Округлення до двох знаків після коми
+                distance: distance.toFixed(0), // Округлення
+                time: time.toFixed(0) // Округлення
             };
         } else {
-            let [lat, lng] = obj.coordinates.split(", ");
-            obj.coordinates = { lat: parseFloat(lat), lng: parseFloat(lng) };
             obj.destination = { distance: "0", time: "0" };
         }
     });

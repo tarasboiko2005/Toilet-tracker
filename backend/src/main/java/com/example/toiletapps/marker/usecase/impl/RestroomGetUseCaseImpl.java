@@ -29,4 +29,14 @@ public class RestroomGetUseCaseImpl implements RestroomGetUseCase {
                 .map(restroomMapper::toResponse)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<RestroomResponse> getUnverifiedRestrooms() {
+        List<Restroom> restrooms = restroomService.getRestrooms();
+
+        return restrooms.stream()
+                .filter(restroom -> !restroom.isVisibility())
+                .map(restroomMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 }

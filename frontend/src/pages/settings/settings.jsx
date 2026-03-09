@@ -13,51 +13,29 @@ class settings extends Component {
     }
 
     componentDidMount() {
-        this.checkRegister();
-        this.checkAdmin();
+        this.checkUserData();
     }
 
-    checkRegister = () => {
-        let data = '';
-        const url = '/api/v1/validate/valid/' + window.localStorage.getItem('jsonwebtoken')
+    checkUserData = () => {
+        const token = window.localStorage.getItem('jsonwebtoken');
+        if (!token) {
+            this.setState({ registered: false, admin: false });
+            return;
+        }
 
-        let config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: url,
-            headers: {},
-            data: data
-        };
-
-        axios.request(config)
+        axios.get('/api/v1/users/user')
             .then((response) => {
-                this.setState({ registered: response.data });
-                console.log(response.data);
+                // response.data will have name, email, roles
+                const roles = response.data.roles || [];
+                this.setState({
+                    registered: true,
+                    admin: roles.includes('ROLE_ADMIN')
+                });
+                console.log("User data:", response.data);
             })
             .catch((error) => {
-                console.log(error);
-            });
-    }
-
-    checkAdmin = () => {
-        let data = '';
-        const url = '/api/v1/validate/checkAdmin/' + window.localStorage.getItem('jsonwebtoken')
-
-        let config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: url,
-            headers: {},
-            data: data
-        };
-
-        axios.request(config)
-            .then((response) => {
-                this.setState({ admin: response.data });
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
+                console.log("User validation failed:", error);
+                this.setState({ registered: false, admin: false });
             });
     }
 

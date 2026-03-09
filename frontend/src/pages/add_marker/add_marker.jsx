@@ -41,16 +41,20 @@ const add_marker_page = () => {
   const addMarker = (event) => {
     const authorization = 'Bearer ' + window.localStorage.getItem('jsonwebtoken')
 
+    const [latStr, lngStr] = addCoords.split(',');
+
     let data = JSON.stringify({
       "name": addName,
-      "coordinates": addCoords,
-      "tags": checkboxValues
+      "address": "Default Address", // Added required field
+      "latitude": parseFloat(latStr.trim()),
+      "longitude": parseFloat(lngStr.trim()),
+      "status": "OPEN" // Added default status
     });
 
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: '/api/v1/markers/create',
+      url: '/api/v1/restrooms/restroom',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': authorization
