@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.a{
+    width: 100px;
+    height: 100px;
+}
+
+.marker {
+    border-radius: 100px;
+}
+.marker_info {
+    margin-left: 5px;
+    height: 105px;
+    width: 200px;
+}
+/*Категорії та кнопка на відгуки*/
+.marker_info_categoryandreviews {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+}
+
+.marker_info_category {
+    width: 87.5%;
+    height: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.marker_info_reviews {
+    width: 12.5%;
+    height: 25px;
+    border-radius: 5px;
+    border: 2px solid #FFCB46;
+    background-color: #F9F0CF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+/*---------------------*/
+
+/*Назва*/
+
+.marker_info_nameandmark {
+    width: 100%;
+    height: 20px;
+    display: flex;
+}
+
+.marker_info_name {
+    width: 100%;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #000000;
+}
+
+/*---------------------*/
+
+/*Відстань та час*/
+.marker_info_distanceandtime {
+    width: 100%;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+}
+
+.marker_info_distance_and_time {
+    width: 77%;
+    height: 20px;
+    display: flex;
+}
+
+.marker_info_distance {
+    margin-right: 10px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #2197B0;
+    background-color: rgb(255, 255, 255);
+}
+
+.marker_info_time {
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #2197B0;
+    background-color: rgb(255, 255, 255);
+}
+
+.marker_info_mark {
+    width: 23%;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #000000;
+    background-color: rgb(255, 255, 255);
+}
+
+.marker_info_mark_4stars {
+    color: #696969;
+    font-size: 12px;
+}
+
+/*---------------------*/
+
+/*Кнопка на гугл карту з шляхом*/
+
+.marker_button_to_way_div {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.marker_button_to_way {
+    width: 78px;
+    height: 19px;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #F6E3A1;
+    border: 1px solid #F6E3A1;
+    color: #82734C;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.main_button:active {
+    transform: scale(1.05); 
+}
+
+/*---------------------*/
+button.gm-ui-hover-effect {
+    visibility: hidden;
+}

@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.conteiner {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    max-height: 1000px;
+    max-width: 500px;
+    background-color: #E4E4E4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+/*Верхня шторка*/
+
+.curtain {
+    width: 100%;
+    height: 71px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0 0 15px 15px;
+    margin: 0 0 40px 0;
+    padding: 10px 20px 10px 10px;
+    display: flex;
+}
+
+.exit {
+    width: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*-----------------*/
+
+/*Настройки*/
+
+.settings_conteiner {
+    padding: 0 50px 0 50px;
+    width: 100%;
+    height: 100vh;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+}
+
+.settings_boxs {
+    margin: 0 0 20px 0 ;
+    padding: 5px 15px 5px 15px;
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    display: flex;
+}
+
+/*Картинки*/
+
+.settings_boxs_icon {
+    height: 100%;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+svg {
+    margin: 0;
+}
+
+/*-----------------*/
+
+/*Текст*/
+
+.settings_boxs_text {
+    height: 100%;
+    padding: 0 0 0 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+/*-----------------*/
+
+/*Спецільні штуки*/
+
+.settings_boxs_special {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.checkbox {
+    --first-color: #000000;
+    --second-color: #2197B0;
+    --white-color: white;
+    --width: 40px;
+    --height: 20px;
+    --offset: 2px;
+    --duration: 0.3s;
+    cursor: pointer;
+}
+
+.checkbox:hover {
+    filter: brightness(1.2);
+}
+
+.checkbox_box {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--width);
+    background-color: var(--first-color);
+    transition: var(--duration);
+}
+
+.checkbox_input {
+    display: none;
+}
+
+.checkbox_input:checked ~ .checkbox_box {
+    background-color: var(--second-color);
+}
+
+.checkbox_input:checked ~ .checkbox_box::before {
+    left: calc(var(--width) - var(--height) + var(--offset));
+}
+
+.checkbox_box::before {
+    content: '';
+    position: absolute;
+    top: var(--offset);
+    left: var(--offset);
+    width: calc(var(--height) - 2 * var(--offset));
+    height: calc(var(--height) - 2 * var(--offset));
+    background-color: var(--white-color);
+    border-radius: 50%;
+    transition: var(--duration);
+}
+
+/*-----------------*/
+
+/*-----------------*/

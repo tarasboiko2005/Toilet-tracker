@@ -1,0 +1,17 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.map_share {
+    background-color: #CCCCCC;
+    flex: 0.9;
+}
+  
+.lower_menu {
+    padding: 0 2rem;
+    background-color: #f3f3f3;
+    flex: 0.1;
+}

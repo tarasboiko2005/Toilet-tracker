@@ -1,0 +1,144 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+import styles from "./settings.module.css";
+
+class settings extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            registered: false,
+            admin: false
+        };
+    }
+
+    componentDidMount() {
+        this.checkRegister();
+        this.checkAdmin();
+    }
+
+    checkRegister = () => {
+        let data = '';
+        const url = '/api/v1/validate/valid/' + window.localStorage.getItem('jsonwebtoken')
+
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: url,
+            headers: {},
+            data: data
+        };
+
+        axios.request(config)
+            .then((response) => {
+                this.setState({ registered: response.data });
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    checkAdmin = () => {
+        let data = '';
+        const url = '/api/v1/validate/checkAdmin/' + window.localStorage.getItem('jsonwebtoken')
+
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: url,
+            headers: {},
+            data: data
+        };
+
+        axios.request(config)
+            .then((response) => {
+                this.setState({ admin: response.data });
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    logOut = () => {
+        localStorage.removeItem('jsonwebtoken');
+        window.location.href = "/settings";
+    };
+
+    render() {
+        return (
+            <>
+                <div>
+
+                </div >
+                <div className={styles.conteiner}>
+                    <div className={styles.curtain}>
+                        <div className={styles.exit}>
+                            <a href="/" target="_self" rel="noopener noreferrer">
+                                <svg width="10" height="22" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.30121 7.29944C3.90875 7.68795 3.90551 8.32105 4.29399 8.71356L9.06537 13.5344C9.45397 13.9271 9.45059 14.5604 9.05782 14.9489L8.69533 15.3074C8.30276 15.6957 7.6698 15.6923 7.28139 15.2999L0.744659 8.69532C0.356154 8.30278 0.359422 7.66963 0.751956 7.28112L7.35624 0.744642C7.74878 0.356138 8.38193 0.359405 8.77044 0.751939L9.12853 1.11375C9.51701 1.50625 9.51377 2.13935 9.1213 2.52787L4.30121 7.29944Z" fill="black" />
+                                </svg>
+                            </a >
+                        </div>
+                        <div className={styles.text}>
+                            Settings
+                        </div>
+                    </div>
+                    <div className={styles.settings_conteiner}>
+                        <div className={styles.settings_boxs} >
+                            <div className={styles.settings_boxs_icon}>
+                                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 17.2C7.5 17.2 5.29 15.92 4 14C4.03 12 8 10.9 10 10.9C12 10.9 15.97 12 16 14C15.3389 14.9844 14.4459 15.7912 13.3996 16.3492C12.3533 16.9072 11.1858 17.1994 10 17.2ZM10 3C10.7956 3 11.5587 3.31607 12.1213 3.87868C12.6839 4.44129 13 5.20435 13 6C13 6.79565 12.6839 7.55871 12.1213 8.12132C11.5587 8.68393 10.7956 9 10 9C9.20435 9 8.44129 8.68393 7.87868 8.12132C7.31607 7.55871 7 6.79565 7 6C7 5.20435 7.31607 4.44129 7.87868 3.87868C8.44129 3.31607 9.20435 3 10 3ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 4.47 15.5 0 10 0Z" fill="black" /></svg>
+                            </div>
+                            {this.state.registered === true ? (
+                                <div className={styles.settings_boxs_text} onClick={this.logOut}>
+                                    Log out
+                                </div >
+                            ) : (
+                                <div className={styles.settings_boxs_text}>
+                                    <a href="/sign_in" target="_self" rel="noopener noreferrer">
+                                        Sign in
+                                    </a >
+                                </div>
+                            )}
+                        </div>
+                        {this.state.admin === true ? (
+                            <div className={styles.settings_boxs}>
+                                <div className={styles.settings_boxs_icon}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 9H13V7H11M12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 2C10.6868 2 9.38642 2.25866 8.17317 2.7612C6.95991 3.26375 5.85752 4.00035 4.92893 4.92893C3.05357 6.8043 2 9.34784 2 12C2 14.6522 3.05357 17.1957 4.92893 19.0711C5.85752 19.9997 6.95991 20.7362 8.17317 21.2388C9.38642 21.7413 10.6868 22 12 22C14.6522 22 17.1957 20.9464 19.0711 19.0711C20.9464 17.1957 22 14.6522 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM11 17H13V11H11V17Z" fill="black" /></svg>
+                                </div>
+                                <a href="/admin_menu" target="_self" rel="noopener noreferrer">
+                                    <div className={styles.settings_boxs_text}>Admin menu</div>
+                                </a>
+                                <div className={styles.settings_boxs_special}></div>
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                        <div className={styles.settings_boxs}>
+                            <div className={styles.settings_boxs_icon}>
+                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_254_149)"><path d="M11.0286 20.5039C11.0326 20.5041 11.0367 20.5041 11.0407 20.5039H11.0286ZM10.8119 20.3675L10.8152 1.62567L10.7382 1.70267L5.434 6.94747C5.29025 7.08882 5.0966 7.16785 4.895 7.16747H2.1648C2.00405 7.20675 1.86206 7.30089 1.7633 7.43367C1.6203 7.60527 1.5356 7.86047 1.5213 8.19267L1.5202 14.1448C1.5312 14.3538 1.6016 14.5122 1.7435 14.6541C1.8788 14.7883 2.1208 14.884 2.4277 14.9159H4.9621C5.1634 14.9159 5.357 14.994 5.4989 15.1348L10.8119 20.3675ZM11.2277 0.0207686C11.869 0.127469 12.276 0.594969 12.3332 1.30227V20.7239L12.3277 20.8174C12.2419 21.4807 11.8195 21.9526 11.154 21.9988C10.6579 22.0318 10.1959 21.8481 9.7768 21.4664L4.6464 16.4119L2.3562 16.4097C1.6478 16.3437 1.0736 16.116 0.6622 15.7057C0.255004 15.3024 0.0179941 14.7583 0 14.1855L0 8.16187C0.0297 7.49527 0.22 6.92987 0.5852 6.48767C0.932153 6.05134 1.43112 5.76217 1.9822 5.67807L2.0977 5.66927H4.5815L9.647 0.659869C10.1178 0.171469 10.6513 -0.0749314 11.2277 0.0218686M18.0587 2.47157C20.4622 3.97967 22 7.23347 22 10.8481C22 14.4616 20.4622 17.7154 18.0598 19.2246C17.8896 19.3315 17.6842 19.3675 17.4878 19.3247C17.2914 19.2819 17.1196 19.1638 17.0093 18.9958C16.9557 18.9129 16.9192 18.8202 16.9019 18.7231C16.8846 18.6259 16.8868 18.5263 16.9084 18.4301C16.93 18.3338 16.9706 18.2428 17.0278 18.1624C17.0849 18.082 17.1576 18.0138 17.2414 17.9618C19.1708 16.7496 20.4787 13.982 20.4787 10.8481C20.4787 7.71307 19.1708 4.94547 17.2414 3.73327C17.1576 3.68125 17.0849 3.61305 17.0278 3.53264C16.9706 3.45223 16.93 3.36124 16.9084 3.26497C16.8868 3.1687 16.8846 3.06909 16.9019 2.97196C16.9192 2.87483 16.9557 2.78213 17.0093 2.69927C17.1196 2.5315 17.2912 2.41361 17.4873 2.37084C17.6835 2.32807 17.8886 2.36494 18.0587 2.47157ZM15.5276 5.42507C17.0236 6.53277 17.9443 8.59307 17.9443 10.8481C17.9443 13.2296 16.9158 15.3889 15.2823 16.4405C15.1132 16.5492 14.9083 16.5873 14.7115 16.5465C14.5147 16.5058 14.3416 16.3895 14.2296 16.2227C14.175 16.1404 14.1373 16.0481 14.1188 15.9511C14.1003 15.8541 14.1013 15.7544 14.1218 15.6578C14.1422 15.5612 14.1818 15.4697 14.2381 15.3886C14.2944 15.3074 14.3663 15.2384 14.4496 15.1854C15.6244 14.4308 16.423 12.7522 16.423 10.8481C16.423 9.03967 15.7036 7.42927 14.6135 6.62297C14.5338 6.56466 14.4665 6.49101 14.4157 6.40636C14.3648 6.3217 14.3314 6.22773 14.3174 6.12997C14.3033 6.03222 14.309 5.93264 14.3339 5.8371C14.3589 5.74155 14.4027 5.65195 14.4628 5.57357C14.5859 5.41483 14.7661 5.31046 14.965 5.28272C15.1639 5.25498 15.3658 5.30606 15.5276 5.42507Z" fill="black" /></g><defs><clipPath id="clip0_254_149"><rect width="22" height="22" fill="white" /></clipPath></defs></svg>
+                            </div>
+                            <div className={styles.settings_boxs_text}>Notification</div>
+                            <div className={styles.settings_boxs_special}>
+                                <label className={styles.checkbox}>
+                                    <input type="checkbox" className={styles.checkbox_input} />
+                                    <div className={styles.checkbox_box}></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div className={styles.settings_boxs}>
+                            <div className={styles.settings_boxs_icon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 9H13V7H11M12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 2C10.6868 2 9.38642 2.25866 8.17317 2.7612C6.95991 3.26375 5.85752 4.00035 4.92893 4.92893C3.05357 6.8043 2 9.34784 2 12C2 14.6522 3.05357 17.1957 4.92893 19.0711C5.85752 19.9997 6.95991 20.7362 8.17317 21.2388C9.38642 21.7413 10.6868 22 12 22C14.6522 22 17.1957 20.9464 19.0711 19.0711C20.9464 17.1957 22 14.6522 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM11 17H13V11H11V17Z" fill="black" /></svg>
+                            </div>
+                            <div className={styles.settings_boxs_text}>About</div>
+                            <div className={styles.settings_boxs_special}></div>
+                        </div>
+
+                    </div>
+                </div>
+            </>
+        );
+    }
+}
+
+export default settings;

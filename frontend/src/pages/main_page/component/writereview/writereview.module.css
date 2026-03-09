@@ -1,0 +1,148 @@
+.container_main {
+    position: absolute;
+    height: 300px;
+    width: 280px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.container{
+    position: absolute;
+    height: 200px;
+    width: 280px;
+    background-color: #ffffff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Вихід і зірочки*/
+
+.exitandstars{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    padding: 0 15px 0 15px;
+}
+
+.exit {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.stars {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/*-----------------*/
+
+/*Ввід відгука*/
+
+.review_box {
+    width: 100%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    padding: 0 15px 0 15px;
+}
+
+.review_field {
+    width: 100%;
+    height: 90px;
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+    border: 2px solid #C4C4C4;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/*-----------------*/
+
+/*Кнопка*/
+
+.button_box {
+    width: 100%;
+    height: 25%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+button {
+    width: 130px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #2197B0;
+    border: 2px solid #2197B0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(1.05); 
+}
+
+/*-----------------*/
+
+/*Помилка*/
+
+/* .error_box {
+    position: absolute;
+    height: 70px;
+    width: 280px;
+    background-color: #F9CFCB;
+    border: 2px solid #ff8176;
+    top:  35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+} */
+
+.error_box {
+    padding: 20px;
+    position: absolute;
+    height: 70px;
+    width: 280px;
+    background-color: #F9CFCB;
+    border: 2px solid #ff8176;
+    top: 0%;
+    left: 50%;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.main_cross_icon {
+    margin-right: 5px;
+    width: 50px; 
+    height: 50px;
+}
+
+/*-----------------*/
