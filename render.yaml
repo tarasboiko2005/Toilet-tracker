@@ -1,0 +1,52 @@
+services:
+  # Database Service
+  - type: database
+    name: toilet-tracker-db
+    databaseName: toilet_tracker
+    user: admin
+    plan: free # Change to a paid plan if needed for persistence after 90 days
+
+  # Backend Service (Spring Boot)
+  - type: web
+    name: toilet-tracker-api
+    runtime: docker
+    plan: free
+    dockerContext: backend
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: toilet-tracker-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: toilet-tracker-db
+          property: port
+      - key: POSTGRES_DB_NAME
+        fromDatabase:
+          name: toilet-tracker-db
+          property: database
+      - key: POSTGRES_USERNAME
+        fromDatabase:
+          name: toilet-tracker-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: toilet-tracker-db
+          property: password
+      - key: JWT_SECRET_KEY
+        generateValue: true
+
+  # Frontend Service (React/Vite)
+  - type: web
+    name: toilet-tracker-ui
+    runtime: static
+    plan: free
+    publishPath: frontend/dist
+    buildCommand: cd frontend && npm install && npm run build
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: toilet-tracker-api
+          type: web
+          property: url
