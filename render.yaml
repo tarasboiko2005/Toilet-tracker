@@ -37,9 +37,8 @@ services:
         generateValue: true
 
   # Frontend Service (React/Vite)
-  - type: web
+  - type: static
     name: toilet-tracker-ui
-    runtime: static
     plan: free
     publishPath: frontend/dist
     buildCommand: cd frontend && npm install && npm run build
