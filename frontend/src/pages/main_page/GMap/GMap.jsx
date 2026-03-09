@@ -40,11 +40,14 @@ const BlueSquare = () => {
     const [latitude, setLatitude] = useState()
     const [longitude, setLongitude] = useState()
 
-    navigator.geolocation.watchPosition(position => {
-        const { latitude, longitude } = position.coords;
-        setLatitude(latitude)
-        setLongitude(longitude)
-    })
+    useEffect(() => {
+        const id = navigator.geolocation.watchPosition(position => {
+            const { latitude, longitude } = position.coords;
+            setLatitude(latitude)
+            setLongitude(longitude)
+        }, (err) => console.log(err), { enableHighAccuracy: true });
+        return () => navigator.geolocation.clearWatch(id);
+    }, []);
 
     const squareStyle = {
         width: '100%',
@@ -104,11 +107,14 @@ function MapToilet({ center }) {
     const [longitude, setLongitude] = useState()
     const [mapCenter, setMapCenter] = useState(center);
 
-    navigator.geolocation.watchPosition(position => {
-        const { latitude, longitude } = position.coords;
-        setLatitude(latitude)
-        setLongitude(longitude)
-    })
+    useEffect(() => {
+        const id = navigator.geolocation.watchPosition(position => {
+            const { latitude, longitude } = position.coords;
+            setLatitude(latitude)
+            setLongitude(longitude)
+        }, (err) => console.log(err), { enableHighAccuracy: true });
+        return () => navigator.geolocation.clearWatch(id);
+    }, []);
 
     const handleNavClick = () => {
         setMapCenter({ lat: latitude, lng: longitude });

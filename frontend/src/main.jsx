@@ -1,5 +1,5 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
+import axios from 'axios'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Sign_in from './pages/sign_in/sign_in'
 import Sign_up from './pages/sign_up/sign_up'
@@ -17,51 +17,53 @@ import Success from './pages/success/success'
 import Success_sign_up from './pages/success/success_sign_up'
 import Admin_menu from './pages/admin_menu/admin_menu'
 
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || '';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main_page />,
-    errorElement: <NotFound/>,
+    errorElement: <NotFound />,
   },
   {
     path: '/sign_up',
-    element: <Sign_up/>,
-    errorElement: <NotFound/>,
+    element: <Sign_up />,
+    errorElement: <NotFound />,
   },
   {
     path: '/sign_in',
-    element: <Sign_in/>,
-    errorElement: <NotFound/>,
+    element: <Sign_in />,
+    errorElement: <NotFound />,
   },
   {
     path: '/search',
-    element: <Search/>,
-    errorElement: <NotFound/>,
+    element: <Search />,
+    errorElement: <NotFound />,
   },
   {
     path: '/add_marker',
-    element: <Add_marker/>,
-    errorElement: <NotFound/>,
+    element: <Add_marker />,
+    errorElement: <NotFound />,
   },
   {
     path: '/add_review',
-    element: <Review/>,
-    errorElement: <NotFound/>,
+    element: <Review />,
+    errorElement: <NotFound />,
   },
   {
     path: '/loading',
-    element: <Loading/>,
-    errorElement: <NotFound/>,
+    element: <Loading />,
+    errorElement: <NotFound />,
   },
   {
     path: '/read_coords',
-    element: <GPS/>,
-    errorElement: <NotFound/>,
+    element: <GPS />,
+    errorElement: <NotFound />,
   },
   {
     path: '/settings',
-    element: <Settings/>,
-    errorElement: <NotFound/>,
+    element: <Settings />,
+    errorElement: <NotFound />,
   },
   // {
   //   path: '/test',
@@ -70,23 +72,23 @@ const router = createBrowserRouter([
   // },
   {
     path: '/success',
-    element: <Success/>,
-    errorElement: <NotFound/>,
+    element: <Success />,
+    errorElement: <NotFound />,
   },
   {
     path: '/success/sign_up',
-    element: <Success_sign_up/>,
-    errorElement: <NotFound/>,
+    element: <Success_sign_up />,
+    errorElement: <NotFound />,
   },
   {
     path: '/admin_menu',
-    element: <Admin_menu/>,
-    errorElement: <NotFound/>,
+    element: <Admin_menu />,
+    errorElement: <NotFound />,
   },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
