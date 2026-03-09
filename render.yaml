@@ -1,10 +1,9 @@
-services:
-  # Database Service
-  - type: database
-    name: toilet-tracker-db
+databases:
+  - name: toilet-tracker-db
     databaseName: toilet_tracker
-    user: admin
     plan: free # Change to a paid plan if needed for persistence after 90 days
+
+services:
 
   # Backend Service (Spring Boot)
   - type: web
