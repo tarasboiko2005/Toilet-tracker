@@ -4,6 +4,7 @@ import stylesSearch from "./search.module.css";
 import styles from "../../main_page/GMap/GMap.module.css";
 import style_categories from "../../main_page/GMap/MarkerCategory.module.css";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function StarSVG() {
   return (
@@ -147,17 +148,17 @@ const Search = () => {
     setLatitude(latitude)
     setLongitude(longitude)
   })
-  
+
   useEffect(() => {
     axios
-        .get("/api/v1/markers/findAll")
-        .then((res) => {
-            setMarkers(res.data);
-            console.log(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+      .get("/api/v1/markers/findAll")
+      .then((res) => {
+        setMarkers(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return isLoaded ? (
     <>
@@ -175,29 +176,29 @@ const Search = () => {
         </div>
       )} */}
       <GoogleMap
-            mapContainerStyle={containerStyle}
-            onClick={() => setActiveMarker(null)}
-            center={mapCenter}
-            onLoad={onLoad}
-            options={{
-                disableDefaultUI: true,
-                gestureHandling: 'greedy',
-                zoom: 17,
-                styles: [
-                    {
-                        featureType: "poi",
-                        stylers: [{ visibility: "off" }],
-                    },
-                ]
-            }}
-        >
+        mapContainerStyle={containerStyle}
+        onClick={() => setActiveMarker(null)}
+        center={mapCenter}
+        onLoad={onLoad}
+        options={{
+          disableDefaultUI: true,
+          gestureHandling: 'greedy',
+          zoom: 17,
+          styles: [
+            {
+              featureType: "poi",
+              stylers: [{ visibility: "off" }],
+            },
+          ]
+        }}
+      >
         <div className={stylesSearch.search}>
           <div className={stylesSearch.search_exit}>
-            <a href="/" target="_self" rel="noopener noreferrer">
+            <Link to="/">
               <svg width="10" height="22" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.30121 7.29944C3.90875 7.68795 3.90551 8.32105 4.29399 8.71356L9.06537 13.5344C9.45397 13.9271 9.45059 14.5604 9.05782 14.9489L8.69533 15.3074C8.30276 15.6957 7.6698 15.6923 7.28139 15.2999L0.744659 8.69532C0.356154 8.30278 0.359422 7.66963 0.751956 7.28112L7.35624 0.744642C7.74878 0.356138 8.38193 0.359405 8.77044 0.751939L9.12853 1.11375C9.51701 1.50625 9.51377 2.13935 9.1213 2.52787L4.30121 7.29944Z" fill="black" />
               </svg>
-            </a>
+            </Link>
           </div>
           <input className={stylesSearch.search_field} value={searchText} onChange={handleInputChange} placeholder="Find a place..." />
         </div>
@@ -224,7 +225,7 @@ const Search = () => {
             scaledSize: { width: 40, height: 40 },
           }}
         />
-        
+
         {filteredMarkers.length > 0 ? (
           filteredMarkers.map(
             ({ id, name, coordinates, averageRating, destination, tags }) => {

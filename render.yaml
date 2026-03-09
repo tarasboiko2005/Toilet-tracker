@@ -45,3 +45,7 @@ services:
     envVars:
       - key: VITE_API_BASE_URL
         value: https://toilet-tracker-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

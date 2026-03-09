@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
@@ -66,6 +66,7 @@ const Search = ({ lat: latitude, lng: longitude }) => {
 
 
 export default function Confirm_marker(props) {
+    const navigate = useNavigate();
     const { id, name, coordinates, tags } = props.markerInfo;
 
     const changeVisibility = () => {
@@ -85,7 +86,7 @@ export default function Confirm_marker(props) {
         axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                window.location.href = "/admin_menu";
+                navigate("/admin_menu");
             })
             .catch((error) => {
                 console.log(error);
